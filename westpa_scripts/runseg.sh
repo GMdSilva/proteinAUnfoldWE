@@ -27,8 +27,9 @@ if [ -n "$SEG_DEBUG" ] ; then
 fi
 
 source $WEST_SIM_ROOT/env.sh
-export CUDA_VISIBLE_DEVICES="${WM_PROCESS_INDEX}"
 
+AVAILABLE_GPUS=($(echo $SLURM_JOB_GPUS | sed -e 's/,/ /g'))
+export CUDA_VISIBLE_DEVICES="${AVAILABLE_GPUS[${WM_PROCESS_INDEX}]}"
 ######################## Set up for running the dynamics #######################
 
 # Set up the directory where data for this segment will be stored.
