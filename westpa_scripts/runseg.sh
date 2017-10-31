@@ -49,7 +49,8 @@ cd $CURRENT_SEG_WORKDIR
 # should have been copied over to the node already, by the script `node.sh`.
 ln -sv $WORKDIR/amber_config/proteinA.parm7 .
 
-# Either continue an existing tractory, or start a new trajectory. Both cases are identical
+# Either continue an existing tractory, or start a new trajectory. Both cases
+# are identical.
 
 # The weighted ensemble algorithm requires that dynamics are stochastic.
 # We'll use the "sed" command to replace the string "RAND" with a randomly
@@ -59,8 +60,8 @@ sed "s/RAND/$WEST_RAND16/g" \
 
 # This trajectory segment will start off where its parent segment left off.
 # The "ln" command makes symbolic links to the parent segment's rst file.
-#This is preferable to copying the files, since it doesn't
-# require writing all the data again.
+# This is preferable to copying the files, since it doesn't require writing all
+# of the data again.
 if [ "$WEST_CURRENT_SEG_INITPOINT_TYPE" = "SEG_INITPOINT_CONTINUES" ]; then
   ln -sv $WEST_SIM_ROOT/$WEST_PARENT_DATA_REF/seg.rst ./parent.rst
 fi
@@ -102,7 +103,7 @@ cat $TEMP | tail -n+2 | awk '{print $2}' > $WEST_PCOORD_RETURN
 echo $WEST_RAND16 > $WEST_RAND_RETURN
 
 # Copy the desired files back to globally-accessible storage space. Everything
-# else we be deleted.
+# else will be deleted.
 rsync seg.rst ${WEST_SIM_ROOT}/${WEST_CURRENT_SEG_DATA_REF}/
 rsync solute.nc ${WEST_SIM_ROOT}/${WEST_CURRENT_SEG_DATA_REF}/
 
