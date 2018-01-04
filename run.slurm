@@ -8,7 +8,7 @@
 #SBATCH --qos=normal
 #SBATCH --cluster=gpu
 #SBATCH --gres=gpu:4
-#SBATCH --constraint=gtx1080
+#SBATCH --partition=gtx1080
 #
 #
 # Submission script for AMBER GPU simulations on h2p.crc.pitt.edu
